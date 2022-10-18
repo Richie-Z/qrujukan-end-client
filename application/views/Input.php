@@ -20,8 +20,17 @@
 					</div>
 
 					<div class="card-body">
-						<label for="name">Link</label>
-						<input type="text" id="name" name="name">
+						<label for="p_nama">Nama</label>
+						<input list="pasien" id="p_nama" class="form-control">
+						<datalist id="pasien" >
+							<option disabled selected>Cari Pasien...</option>
+							<?php foreach ($pasien as $p) : ?>
+								<option value="<?= $p['p_nama'] ?>"><?= $p['p_no_bpjs'] ?></option>
+							<?php endforeach; ?>
+						</datalist>
+
+
+						
 					</div>
 
 					<div class="card-footer">
@@ -46,7 +55,7 @@
 		$(document).ready(function() {
 			$("#generate").on("click", function() {
 
-				var link = $("#name").val();
+				var link = $("#p_nama").val();
 
 				var img = '<img src = "https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + link + '" > ';
 
@@ -55,7 +64,7 @@
 				$("#result").html(img);
 
 
-				
+
 			});
 		});
 	</script>
