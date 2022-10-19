@@ -3,10 +3,18 @@
 
 class InputModel extends CI_Model{
 
-	public function getDokter(){
+	public function getDokterRS($idRs){
 
+		$this->db->where('rs_id', $idRs);
 		return $this->db->get('dokter')->result_array();
 		
+	}
+
+	public function getDokter_RS(){
+		$this->db->select('*');
+		$this->db->from('dokter');
+		$this->db->join('rumah_sakit');
+		$this->db->on()
 	}
 	
 	public function getRumahSakit(){

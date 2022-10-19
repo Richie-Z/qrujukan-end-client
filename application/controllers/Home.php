@@ -9,14 +9,19 @@ class Home extends CI_Controller{
 	}
 
 	public function index(){
-		$data['dokter'] = $this->InputModel->getDokter();
 		$data['dokter_keluarga'] = $this->InputModel->getDokterKeluarga();
 		$data['rumah_sakit'] = $this->InputModel->getRumahSakit();
 		$data['pasien'] = $this->InputModel->getPasien();
 
 		$this->load->view('input', $data);
 	}
+	
 
+	function getDokter(){
+        $rs_id = $this->input->post('id',TRUE);
+        $data = $this->InputModel->getDokterRS($rs_id);
+        echo json_encode($data);
+    }
 
 
 

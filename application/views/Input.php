@@ -20,17 +20,46 @@
 					</div>
 
 					<div class="card-body">
-						<label for="p_nama">Nama</label>
+						<label for="p_nama">Nama Pasien</label>
 						<input list="pasien" id="p_nama" class="form-control">
-						<datalist id="pasien" >
+						<datalist id="pasien">
 							<option disabled selected>Cari Pasien...</option>
 							<?php foreach ($pasien as $p) : ?>
 								<option value="<?= $p['p_nama'] ?>"><?= $p['p_no_bpjs'] ?></option>
 							<?php endforeach; ?>
 						</datalist>
 
+						<input type="hidden" id="dk_id" name="dk_id" value="301">
 
-						
+
+						<label for="rs_nama">Rumah Sakit</label>
+						<input list="rumah_sakit" id="rs_nama" class="form-control">
+						<datalist id="rumah_sakit">
+							<option disabled selected>Cari Rumah Sakit...</option>
+							<?php foreach ($rumah_sakit as $rs) : ?>
+								<option value="<?= $rs['rs_nama'] ?>"><?= $rs['rs_id'] ?></option>
+							<?php endforeach; ?>
+						</datalist>
+
+						<label for="d_nama">Dokter Rujukan</label>
+						<input list="dokter" id="d_nama" class="form-control">
+						<datalist id="dokter">
+							<option disabled selected>Cari Dokter Rujukan...</option>
+
+						</datalist>
+
+
+						<label for="tgl_rujukan">Tanggal Rujukan</label>
+						<input type="date" id="r_tgl_rujukan" class="form-control">
+
+						<label for="diagnosa">Diagnosa Pasien</label>
+						<textarea name="r_diagnosa" id="r_diagnosa" cols="10" rows="5" class="form-control"></textarea>
+
+
+
+
+
+
 					</div>
 
 					<div class="card-footer">
@@ -51,6 +80,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
 	<script>
 		$(document).ready(function() {
 			$("#generate").on("click", function() {
@@ -68,6 +98,41 @@
 			});
 		});
 	</script>
+
+
+
+<script>
+        $(document).ready(function(){
+ 
+            $('#rumah_sakit').change(function(){ 
+                var id=$(this).val();
+                $.ajax({
+                    url : "<?= base_url('home/getDokter');?>",
+                    method : "POST",
+                    data : {id: id},
+                    async : true,
+                    dataType : 'json',
+                    success: function(data){
+                         
+                        var html = '';
+                        var i;
+                        for(i=0; i<data.length; i++){
+                            html += '<option value='+data[i].d_id+'>'+data[i].d_nama_spesialis+'</option>';
+                        }
+                        $('#dokter').html(html);
+ 
+                    }
+                });
+                return false;
+            }); 
+             
+        });
+    </script>
+
+
 </body>
+
+
+
 
 </html>
