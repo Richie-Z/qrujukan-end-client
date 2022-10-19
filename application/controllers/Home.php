@@ -19,7 +19,7 @@ class Home extends CI_Controller
 	}
 
 
-	public function getdokter()
+	public function dokter()
 	{
 		$rs_nama = $this->input->post('rs_nama', TRUE);
 		$data = $this->InputModel->getDokterRs($rs_nama);
