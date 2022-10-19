@@ -9,7 +9,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -31,34 +30,25 @@
 							<?php
 							
 							foreach ($pasien as $p) : ?>
-								<option value="<?= $p['p_nama'] ?>"><?= $p['p_no_bpjs'] ?></option>
+								<option value="<?= $p['p_no_bpjs'] ?>"><?=$p['p_nama']?>-<?= $p['p_no_bpjs'] ?>
+								</option>
 							<?php endforeach; ?>
 						</select>
 
 
 
-
-						<label for="p_nama">Nama Pasien</label>
-						<input list="pasien" id="p_nama" class="form-control" placeholder="Cari Pasien...">
-						<datalist id="pasien">
-
-							<?php foreach ($pasien as $p) : ?>
-								<option value="<?= $p['p_nama'] ?>"><?= $p['p_no_bpjs'] ?></option>
-							<?php endforeach; ?>
-
-						</datalist>
-
 						<input type="hidden" id="dk_id" name="dk_id" value="301">
 
 
 						<label for="rs_nama">Rumah Sakit</label>
-						<input list="rumah_sakit" id="rs_nama" class="form-control" placeholder="Cari Dokter...">
-						<datalist id="rumah_sakit">
+						<select class="js-example-basic-single form-control" name="rs_nama" id="rs_id">
+							<?php
 
-							<?php foreach ($rumah_sakit_dokter as $rsd) : ?>
-								<option value="<?= $rsd['rs_nama'] ?>"><?= $rsd['d_nama'] ?></option>
+							foreach ($rumah_sakit_dokter as $rsd) : ?>
+								<option value="<?= $rsd['rs_id'] ?>"><?=$rsd['rs_nama']?>-<?= $rsd['d_nama'] ?>
+								</option>
 							<?php endforeach; ?>
-						</datalist>
+						</select>
 
 
 
@@ -90,11 +80,18 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 
 	<script>
+
+		// In your Javascript (external .js resource or <script> tag)
+
 		$(document).ready(function() {
+
+			$('.js-example-basic-single').select2();
+
 			$("#generate").on("click", function() {
 
 				var link = $("#p_nama").val();

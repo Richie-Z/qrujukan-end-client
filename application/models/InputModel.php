@@ -16,12 +16,15 @@ class InputModel extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('dokter');
 		$this->db->join('rumah_sakit', 'dokter.rs_id = rumah_sakit.rs_id');
+
+		return $this->db->get()->result_array();
 		
 	}
 	
 	public function getRumahSakit(){
-		
-		return $this->db->get('rumah_sakit')->result_array();
+
+			return $this->db->get('rumah_sakit')->result_array();
+
 	}
 	
 	
