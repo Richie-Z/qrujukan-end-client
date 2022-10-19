@@ -3,6 +3,8 @@
 
 class InputModel extends CI_Model{
 
+	
+
 	public function getDokterRS($idRs){
 
 		$this->db->where('rs_id', $idRs);
@@ -13,8 +15,8 @@ class InputModel extends CI_Model{
 	public function getDokter_RS(){
 		$this->db->select('*');
 		$this->db->from('dokter');
-		$this->db->join('rumah_sakit');
-		$this->db->on()
+		$this->db->join('rumah_sakit', 'dokter.rs_id = rumah_sakit.rs_id');
+		
 	}
 	
 	public function getRumahSakit(){
