@@ -3,13 +3,12 @@
 
 class InputModel extends CI_Model{
 
-	
 
-	public function getDokterRS($idRs){
 
-		$this->db->where('rs_id', $idRs);
-		return $this->db->get('dokter')->result_array();
-		
+	public function getDokterRs($idRS){
+		$this->db->where('rs_id', $idRS);
+		return $this->db->get('dokter')->result();
+
 	}
 
 	public function getDokter_RS(){

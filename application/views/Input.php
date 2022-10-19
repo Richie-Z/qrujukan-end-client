@@ -25,12 +25,13 @@
 					<div class="card-body">
 
 
-						<label for="pasien">Nama Pasien</label>
+						<label for="pasien">Nama Pasien - No BPJS</label>
 						<select class="js-example-basic-single form-control" name="p_nama" id="p_nama">
+							<option disabled selected>Pilih Pasien...</option>
 							<?php
-							
+
 							foreach ($pasien as $p) : ?>
-								<option value="<?= $p['p_no_bpjs'] ?>"><?=$p['p_nama']?>-<?= $p['p_no_bpjs'] ?>
+								<option value="<?= $p['p_no_bpjs'] ?>"><?= $p['p_nama'] ?> - <?= $p['p_no_bpjs'] ?>
 								</option>
 							<?php endforeach; ?>
 						</select>
@@ -40,14 +41,21 @@
 						<input type="hidden" id="dk_id" name="dk_id" value="301">
 
 
-						<label for="rs_nama">Rumah Sakit</label>
-						<select class="js-example-basic-single form-control" name="rs_nama" id="rs_id">
+						<label for="rumah_sakit">Rumah Sakit</label>
+						<select class="js-example-basic-single form-control" name="rs_nama" id="rs_nama">
+							<option selected disabled>Pilih Rumah Sakit...</option>
 							<?php
 
-							foreach ($rumah_sakit_dokter as $rsd) : ?>
-								<option value="<?= $rsd['rs_id'] ?>"><?=$rsd['rs_nama']?>-<?= $rsd['d_nama'] ?>
-								</option>
+							foreach ($rumah_sakit as $rs) : ?>
+								<option value="<?= $rs['rs_id'] ?>"><?= $rs['rs_nama'] ?></option>
 							<?php endforeach; ?>
+						</select>
+
+
+						<label for="dokter">Dokter</label>
+						<select class="js-example-basic-single form-control" name="d_nama" id="d_nama">
+							<option selected disabed>Pilih Dokter...</option>
+
 						</select>
 
 
@@ -82,10 +90,39 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+	<script>
+		$(document).ready(function() {
+			$('#rs_nama').change(function() {
+				var rs_nama = $('#rs_nama').val();
+				
+				
+					$.ajax({
+						url: "<?php echo base_url('index.php/home/getdokter');?>",
+						method:"POST",
+						data:{rs_nama: rs_nama},
+						dataType:'json',
+						success:function(data){
+							var html = '';
+							for(var count = 0; count < data.length; count++){
+								 html += '<option value="'+data[count].d_id+'">'+data[count].d_nama_spesialis+'</option>'
+							}
+
+							$('#d_nama').html(html);
+						}
+					});
+			
+
+
+
+			});
+		});
+	</script>
+
+
+
 
 
 	<script>
-
 		// In your Javascript (external .js resource or <script> tag)
 
 		$(document).ready(function() {
