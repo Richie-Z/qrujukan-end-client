@@ -22,60 +22,64 @@
 						<h4>Input Data</h4>
 					</div>
 
-					<div class="card-body">
+					<form action="<?=base_url('home/addRujukan')?>" method="post">
+
+						<div class="card-body">
 
 
-						<label for="pasien">Nama Pasien - No BPJS</label>
-						<select class="js-example-basic-single form-control" name="p_nama" id="p_nama">
-							<option disabled selected>Pilih Pasien...</option>
-							<?php
+							<label for="pasien">Nama Pasien - No BPJS</label>
+							<select class="js-example-basic-single form-control" name="p_no_bpjs" id="p_no_bpjs">
+								<option disabled selected>Pilih Pasien...</option>
+								<?php
 
-							foreach ($pasien as $p) : ?>
-								<option value="<?= $p['p_no_bpjs'] ?>"><?= $p['p_nama'] ?> - <?= $p['p_no_bpjs'] ?>
-								</option>
-							<?php endforeach; ?>
-						</select>
-
-
-
-						<input type="hidden" id="dk_id" name="dk_id" value="301">
-
-
-						<label for="rumah_sakit">Rumah Sakit</label>
-						<select class="js-example-basic-single form-control" name="rs_nama" id="rs_nama">
-							<option selected disabled>Pilih Rumah Sakit...</option>
-							<?php
-
-							foreach ($rumah_sakit as $rs) : ?>
-								<option value="<?= $rs['rs_id'] ?>"><?= $rs['rs_nama'] ?></option>
-							<?php endforeach; ?>
-						</select>
-
-
-						<label for="dokter">Dokter</label>
-						<select class="js-example-basic-single form-control" name="d_nama" id="d_nama">
-							<option selected disabed>Pilih Dokter...</option>
-
-						</select>
+								foreach ($pasien as $p) : ?>
+									<option value="<?= $p['p_no_bpjs'] ?>"><?= $p['p_nama'] ?> - <?= $p['p_no_bpjs'] ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
 
 
 
-
-						<label for="tgl_rujukan">Tanggal Rujukan</label>
-						<input type="date" id="r_tgl_rujukan" class="form-control">
-
-						<label for="diagnosa">Diagnosa Pasien</label>
-						<textarea name="r_diagnosa" id="r_diagnosa" cols="10" rows="5" class="form-control"></textarea>
+							<input type="hidden" id="dk_id" name="dk_id" value="478820">
 
 
-					</div>
+							<label for="rumah_sakit">Rumah Sakit</label>
+							<select class="js-example-basic-single form-control" name="rs_id" id="rs_id">
+								<option selected disabled>Pilih Rumah Sakit...</option>
+								<?php
 
-					<div class="card-footer">
-						<button class="btn btn-primary float-end" id="generate" name="generate">Generate</button>
+								foreach ($rumah_sakit as $rs) : ?>
+									<option value="<?= $rs['rs_id'] ?>"><?= $rs['rs_nama'] ?></option>
+								<?php endforeach; ?>
+							</select>
+
+
+							<label for="dokter">Dokter</label>
+							<select class="js-example-basic-single form-control" name="d_id" id="d_id">
+								<option selected disabed>Pilih Dokter...</option>
+
+							</select>
+
+
+
+
+							<label for="tgl_rujukan">Tanggal Rujukan</label>
+							<input type="date" id="r_tgl_rujukan" name="r_tgl_rujukan" class="form-control">
+
+							<label for="diagnosa">Diagnosa Pasien</label>
+							<textarea name="r_diagnosa" id="r_diagnosa" cols="10" rows="5" class="form-control"></textarea>
+
+
+						</div>
+						
+						
+						<div class="card-footer">
+							<button class="btn btn-primary float-end" type="submit" id="generate" name="generate">Generate</button>
+						</div>
+					</form>
 					</div>
 				</div>
-			</div>
-
+				
 			<div class="col-6">
 				<div id="result"></div>
 			</div>
@@ -92,8 +96,8 @@
 
 	<script>
 		$(document).ready(function() {
-			$('#rs_nama').change(function() {
-				var rs_nama = $('#rs_nama').val();
+			$('#rs_id').change(function() {
+				var rs_nama = $('#rs_id').val();
 
 
 				$.ajax({
@@ -104,12 +108,12 @@
 					},
 					dataType: 'json',
 					success: function(data) {
-						var html = '';
+						var html = '<option selected disabled>Pilih Dokter...</option>';
 						for (var count = 0; count < data.length; count++) {
 							html += '<option value="' + data[count].d_id + '">' + data[count].d_nama_spesialis + '</option>'
 						}
 
-						$('#d_nama').html(html);
+						$('#d_id').html(html);
 					}
 				});
 
