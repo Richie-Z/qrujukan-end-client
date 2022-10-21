@@ -27,20 +27,27 @@ class Home extends CI_Controller
 	}
 
 	
+
+	
 	public function addRujukan(){
 
 		
 		$this->InputModel->addRujukan();
 		$topRujukanId = $this->InputModel->getTopRujukan();
+		$data['image'] = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=http://localhost/bpjs_hackathon/backend/get_by_id_rujukan/?idRujukan='.$topRujukanId->r_no_rujukan;
+		
 
-		// $config['upload_path']          = './images/anggota';
-		// $config['allowed_types']        = 'gif|jpg|png|jpeg';
-		// $config['max_size']             = 2048;
-		// $config['file_name']            = 'item-' . date('ymd') . '-' . substr(md5(rand()), 0, 10);
 
-		// $this->$this->load->library('upload', $config);
+		$this->InputModel->updateQrData($topRujukanId->r_no_rujukan,$data['image'] );
 
-		// $this->upload->do_upload('userfile');
+		//View Nampilin qr
+		// $this->load->view('qr_view',$data );
+		
+
+		//kembali ke home
+		redirect(base_url());
+		
+
 	}
 
 

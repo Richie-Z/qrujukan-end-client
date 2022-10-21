@@ -56,6 +56,15 @@ class InputModel extends CI_Model
 
 	public function getTopRujukan(){
 		$this->db->select_max('r_no_rujukan');
-		return $this->db->get('rujukan');
+		return $this->db->get('rujukan')->row();
+	}
+
+	public function updateQrData($id, $qrLink){
+		$data = array(
+			'r_link_qr' => $qrLink
+	);
+	
+	$this->db->where('r_no_rujukan', $id);
+	$this->db->update('rujukan', $data);
 	}
 }
