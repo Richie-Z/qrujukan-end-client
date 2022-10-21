@@ -94,23 +94,25 @@
 		$(document).ready(function() {
 			$('#rs_nama').change(function() {
 				var rs_nama = $('#rs_nama').val();
-				
-				
-					$.ajax({
-						url: "<?php echo base_url('index.php/home/getdokter');?>",
-						method:"POST",
-						data:{rs_nama: rs_nama},
-						dataType:'json',
-						success:function(data){
-							var html = '';
-							for(var count = 0; count < data.length; count++){
-								 html += '<option value="'+data[count].d_id+'">'+data[count].d_nama_spesialis+'</option>'
-							}
 
-							$('#d_nama').html(html);
+
+				$.ajax({
+					url: "<?php echo base_url('/home/dokter'); ?>",
+					method: "POST",
+					data: {
+						rs_nama: rs_nama
+					},
+					dataType: 'json',
+					success: function(data) {
+						var html = '';
+						for (var count = 0; count < data.length; count++) {
+							html += '<option value="' + data[count].d_id + '">' + data[count].d_nama_spesialis + '</option>'
 						}
-					});
-			
+
+						$('#d_nama').html(html);
+					}
+				});
+
 
 
 
