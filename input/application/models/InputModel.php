@@ -3,9 +3,6 @@
 
 class InputModel extends CI_Model
 {
-
-
-
 	public function getDokterRs($idRS)
 	{
 		return $this->db->where("rs_id", $idRS)->get('dokter')->result_array();
@@ -39,32 +36,34 @@ class InputModel extends CI_Model
 	}
 
 
-	public function addRujukan(){
+	public function addRujukan()
+	{
 		$data = [
 			'p_no_bpjs' => $this->input->post('p_no_bpjs'),
 			'rs_id' => $this->input->post('rs_id'),
 			'd_id' => $this->input->post('d_id'),
 			'r_tgl_rujukan' => $this->input->post('r_tgl_rujukan'),
 			'r_diagnosa' => $this->input->post('r_diagnosa'),
-			'dk_id' => $this->input->post('dk_id')
-			
+			'dk_id' => $this->input->post('dk_id'),
 		];
 
 		$this->db->insert('rujukan', $data);
 	}
 
 
-	public function getTopRujukan(){
+	public function getTopRujukan()
+	{
 		$this->db->select_max('r_no_rujukan');
 		return $this->db->get('rujukan')->row();
 	}
 
-	public function updateQrData($id, $qrLink){
+	public function updateQrData($id, $qrLink)
+	{
 		$data = array(
 			'r_link_qr' => $qrLink
-	);
-	
-	$this->db->where('r_no_rujukan', $id);
-	$this->db->update('rujukan', $data);
+		);
+
+		$this->db->where('r_no_rujukan', $id);
+		$this->db->update('rujukan', $data);
 	}
 }

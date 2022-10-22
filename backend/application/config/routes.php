@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -57,4 +57,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 //GET DATA RUJUKAN
 $route['get_all_rujukan'] = 'rujukan/all_rujukan';
-$route['get_by_id_rujukan'] = 'rujukan/by_id_rujukan';
+$route['get_by_id_rujukan/(:num)'] = 'rujukan/by_id_rujukan/$1';

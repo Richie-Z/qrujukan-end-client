@@ -1,0 +1,5 @@
+./backend/vendor
+./backend/composer.lock
+./input/vendor
+./input/composer.lock
+

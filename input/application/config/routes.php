@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -55,3 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 
+$route['review/(:num)'] = 'home/review/$1';
+$route['rujukan/(:num)'] = 'home/rujukan/$1';
+$route['tolak/(:num)'] = 'home/tolak/$1';
+$route['terima/(:num)'] = 'home/terima/$1';
